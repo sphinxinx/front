@@ -1,1 +1,12 @@
-
+.contenedor-imagen{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+.iconLogin{
+    width: auto;
+    transform: scale(4);
+    margin-bottom: 10%;
+}

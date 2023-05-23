@@ -16,16 +16,10 @@ button{
 html{
   background-color: #001E3C;
 }
-.contenedor-imagen{
-  display: flex;
-  flex-direction: column;
-}
-
-.contenedor-imagen img {
-  align-items: center;
-    
-  
-  
+.iconInicial{
+  transform: scale(4);
+  margin-bottom: 3%;
+  color: white;
 }
 
 
