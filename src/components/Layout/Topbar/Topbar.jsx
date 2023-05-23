@@ -17,7 +17,8 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 const pages = ['Seguimiento', 'Ejercicios', 'Marcas'];
 const settings = ['Profile', 'Logout'];
 
-export const Topbar = () => {
+export const Topbar = (props) => {
+    const {setRenderBody} = props
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -28,8 +29,10 @@ export const Topbar = () => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (page) => {
         setAnchorElNav(null);
+        
+        console.log(page)
     };
 
     const handleCloseUserMenu = () => {
@@ -89,7 +92,7 @@ export const Topbar = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page} onClick={()=>handleCloseNavMenu('page')}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -112,7 +115,7 @@ export const Topbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        ProjectGym
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
