@@ -37,8 +37,8 @@ export const RegistrosForm = () => {
                             setRepeticiones(event.target.value);
                         }} />
                 </label>
-                <label>Peso/s:
-                    <input placeholder="Ej: 30-35-35..." type="text"
+                <label>Peso maximo (Kg):
+                    <input placeholder="Peso maximo levantado" type="number"
                         onChange={(event) => {
                             setPeso(event.target.value);
                         }} />
