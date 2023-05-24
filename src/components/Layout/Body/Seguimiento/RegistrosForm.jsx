@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './RegistrosForm.css'
 import Button from '@mui/material/Button'
+import Axios from "axios";
 
 export const RegistrosForm = () => {
 
@@ -13,7 +14,15 @@ export const RegistrosForm = () => {
     
 
     const registrarDatos = () => {
-        alert(ejercicio)
+        Axios.post("http://localhost:3001/create",{
+            ejercicio: ejercicio,
+            series: series,
+            repeticiones: repeticiones,
+            peso: peso,
+            fecha: fecha
+        }).then(() => {
+            alert("Ejercicio registrado")
+        });
     }
 
     return (
