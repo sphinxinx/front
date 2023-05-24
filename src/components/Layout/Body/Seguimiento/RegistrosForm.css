@@ -1,0 +1,30 @@
+
+.RegistrosForm {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.datos {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    color: white;
+}
+.datos input {
+    width: 300px;
+    align-items: center;
+    height: 30px;
+    font-size: 15px;
+    padding-left: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+.datos Button{
+    margin-top: 10px;
+}
+#inputFecha {
+    color: #8e8686;
+}

@@ -32,7 +32,7 @@ export const Topbar = (props) => {
     const handleCloseNavMenu = (page) => {
         setAnchorElNav(null);
         
-        console.log(page)
+        setRenderBody(page)
     };
 
     const handleCloseUserMenu = () => {
@@ -86,13 +86,13 @@ export const Topbar = (props) => {
                                 horizontal: 'left',
                             }}
                             open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
+                            onClose={()=>handleCloseNavMenu('')}
                             sx={{
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={()=>handleCloseNavMenu('page')}>
+                                <MenuItem key={page} onClick={()=>handleCloseNavMenu(page)}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -121,8 +121,8 @@ export const Topbar = (props) => {
                         {pages.map((page) => (
                             <Button
                                 key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                onClick={()=>handleCloseNavMenu(page)}
+                                sx={{ mx:3, my: 2, color: 'white', display: 'block' }}
                             >
                                 {page}
                             </Button>

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import './Body.css';
+import {RegistrosForm} from './Seguimiento/RegistrosForm'
+import {Marcas} from './Marcas/Marcas'
+import {Ejercicios} from './Ejercicios/Ejercicios'
 
 
 export const Body = (props) => {
@@ -7,19 +10,19 @@ export const Body = (props) => {
 
     const [renderPage, setRenderPage] = useState('')
 
-    useEffect(() => {   // pasar las mierdas esta a una enumeracion
+    useEffect(() => {  
         switch (renderBody) {
             case 'Seguimiento':
-                setRenderPage('Seguimiento')
+                setRenderPage(<RegistrosForm/>)
                 break;
             case 'Ejercicios':
-                setRenderPage('')
+                setRenderPage(<Ejercicios/>)
                 break;
             case 'Marcas':
-                setRenderPage('')
+                setRenderPage(<Marcas/>)
                 break;
             default:
-                setRenderPage('')
+                setRenderPage(<RegistrosForm/>)
                 break;
         }
     }, [renderBody]);
@@ -27,6 +30,8 @@ export const Body = (props) => {
 
     return (
 
-        <>{renderPage}</>
+        <div className="body">
+            {renderPage}
+        </div>
     )
 }
