@@ -5,26 +5,29 @@
     justify-content: center;
     
 }
-.datos {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    align-items: center;
-    color: white;
-}
-.datos input {
-    width: 300px;
-    align-items: center;
-    height: 30px;
-    font-size: 15px;
-    padding-left: 10px;
-    border-radius: 5px;
-    margin: 5px;
-}
-.datos Button{
-    margin-top: 10px;
-}
+
 #inputFecha {
     color: #8e8686;
 }
+
+table {
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: white;  
+}
+
+tr{
+    text-align: center;
+}
+
+.css-sghohy-MuiButtonBase-root-MuiButton-root .css-1sszw6i-MuiButtonBase-root-MuiButton-root{
+    margin-left: 3;
+}
+
+.container {
+    margin-top: 10px;
+}
+.css-zqcytf-MuiButtonGroup-root .MuiButtonGroup-grouped{
+    min-width: 90px;
+}
+
