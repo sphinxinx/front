@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './RegistrosForm.css'
 import Button from '@mui/material/Button'
 import Axios from "axios";
+
 
 export const RegistrosForm = () => {
 
@@ -11,7 +12,17 @@ export const RegistrosForm = () => {
     const [peso, setPeso] = useState("")
     const [fecha, setFecha] = useState("")
 
+    const [registrosList,setRegistros] = useState([])
     
+    const getRegistros = () => {
+        Axios.get("http://localhost:3001/registros").then((respuesta) => {
+            setRegistros(respuesta.data);
+        });
+    }
+
+    useEffect(() => { 
+        getRegistros() 
+    }, []);   
 
     const registrarDatos = () => {
         Axios.post("http://localhost:3001/create",{
@@ -21,6 +32,7 @@ export const RegistrosForm = () => {
             peso: peso,
             fecha: fecha
         }).then(() => {
+            getRegistros();
             alert("Ejercicio registrado")
         });
     }
@@ -59,6 +71,13 @@ export const RegistrosForm = () => {
                         }} />
                 </label>
                 <Button variant="contained" color="success" onClick={registrarDatos}>Registrar</Button>
+            </div>
+            <div className="lista">
+                {
+                    registrosList.map((val,key) => {
+                        return <div className="">{val.ejercicio}</div>
+                    })
+                }
             </div>
         </div>
     )
