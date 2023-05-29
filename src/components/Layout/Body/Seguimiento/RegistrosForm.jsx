@@ -4,15 +4,19 @@ import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import Axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const notificacion = withReactContent(Swal)
 
 export const RegistrosForm = () => {
 
     const [ejercicio, setEjercicio] = useState("")
-    const [series, setSeries] = useState()
+    const [series, setSeries] = useState("")
     const [repeticiones, setRepeticiones] = useState("")
-    const [peso, setPeso] = useState()
+    const [peso, setPeso] = useState("")
     const [fecha, setFecha] = useState("")
-    const [ID, setID] = useState()
+    const [ID, setID] = useState("")
 
     const [editar, setEditar] = useState(false)
 
@@ -48,7 +52,7 @@ export const RegistrosForm = () => {
         setPeso(val.peso_maximo)
         setFecha(val.fecha)
         setID(val.IDregistro)
-        console.log(val)
+
 
     }
 
@@ -62,6 +66,18 @@ export const RegistrosForm = () => {
         }).then(() => {
             getRegistros();
             limpiarCampos();
+            notificacion.fire({
+                title: <strong>Registro añadido</strong>,
+                html: <i>El ejercicio <strong>{ejercicio}</strong> fue registrado con exito</i>,
+                icon: 'success'
+            })
+        }).catch(function (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No se ha insertado el registro',
+                footer: JSON.parse(JSON.stringify(error)).message
+            })
         });
     }
 
@@ -76,7 +92,39 @@ export const RegistrosForm = () => {
         }).then(() => {
             getRegistros();
             limpiarCampos();
+            notificacion.fire({
+                title: <strong>Registro actualizado</strong>,
+                html: <i>El ejercicio <strong>{ejercicio}</strong> fue actualizado con exito</i>,
+                icon: 'success'
+            })
+        }).catch(function (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No se ha actualizado el registro',
+                footer: JSON.parse(JSON.stringify(error)).message
+            })
         });
+    }
+
+    const eliminarRegistro = (ID) => {
+        Axios.delete(`http://localhost:3001/delete/${ID}`, {
+        }).then(() => {
+            getRegistros();
+            limpiarCampos();
+            notificacion.fire({
+                title: <strong>Registro eliminado</strong>,
+                html: <i>El ejercicio con el ID <strong>{ID}</strong> fue eliminado con exito</i>,
+                icon: 'success'
+            })
+        }).catch(function (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No se ha eliminado el registro',
+                footer: JSON.parse(JSON.stringify(error)).message
+            })
+        })
     }
 
     return (
@@ -124,14 +172,14 @@ export const RegistrosForm = () => {
                 </div>
                 <div className="card-footer text-muted">
                     {
-                        editar==true?
-                        <>
-                        <Button variant="contained" onClick={update}>Actualizar</Button>
-                        <Button variant="contained" className="cancelar" color="error" onClick={limpiarCampos}>Cancelar</Button>
-                        </>
-                        :<Button variant="contained" color="success" onClick={registrarDatos}>Registrar</Button>
+                        editar === true ?
+                            <>
+                                <Button variant="contained" onClick={update}>Actualizar</Button>
+                                <Button variant="contained" className="cancelar" color="error" onClick={limpiarCampos}>Cancelar</Button>
+                            </>
+                            : <Button variant="contained" color="success" onClick={registrarDatos}>Registrar</Button>
                     }
-                    
+
                 </div>
             </div>
             <table className="table table-striped">
@@ -157,11 +205,13 @@ export const RegistrosForm = () => {
                                 <td>{val.peso_maximo}</td>
                                 <td>{val.fecha}</td>
                                 <td><ButtonGroup variant="contained" aria-label="outlined primary button group">
-                                        <Button onClick={() =>{
-                                            editarRegistro(val)
-                                        }}>Editar</Button>
-                                        <Button color="error">Borrar</Button>
-                                    </ButtonGroup>
+                                    <Button onClick={() => {
+                                        editarRegistro(val)
+                                    }}>Editar</Button>
+                                    <Button color="error" onClick={() => {
+                                        eliminarRegistro(val.IDregistro)
+                                    }}>Borrar</Button>
+                                </ButtonGroup>
                                 </td>
                             </tr>
                         })

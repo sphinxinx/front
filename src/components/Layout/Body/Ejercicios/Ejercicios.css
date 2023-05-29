@@ -1,0 +1,24 @@
+.posicionTitulo{ 
+    width: 100%;
+    border: 2px;
+    border-radius: 2px;
+    border-color: white;
+    background:-webkit-radial-gradient(center center, circle, #1976D2, #001E3C);
+    margin-top: 2%;
+   
+}
+.titulo {
+    color: white;
+    display: flex;
+    justify-content: center;
+    
+    
+}
+hr {
+    color: white;
+}
+.rutinaContainer {
+    
+    padding-left: 13%;
+    padding-top: 2%;
+}
